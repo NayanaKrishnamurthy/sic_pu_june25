@@ -1,9 +1,11 @@
-lines = int(input("E. Enter number of lines for Pascal's Triangle: "))
-
-for i in range(lines):
-    print(' ' * (lines - i), end='')
-    val = 1
-    for j in range(i + 1):
-        print(val, end=' ')
-        val = val * (i - j) // (j + 1)
-    print()
+n = int(input("Enter an odd number for the size of X: "))
+if n % 2 == 0:
+    print("Please enter an odd number.")
+else:
+    for i in range(n):
+        for j in range(n):
+            if j == i or j == n - 1 - i:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
