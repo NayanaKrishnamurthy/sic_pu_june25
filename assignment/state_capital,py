@@ -1,0 +1,28 @@
+import sys
+
+states = []
+capitals = []
+
+args = sys.argv[1:]  # Skip script name
+
+for pair in args:
+    parts = pair.strip().split()
+    
+    if len(parts) < 2:
+        print(f"Invalid input format: '{pair}' — should be 'State Capital'")
+        continue
+    
+    # Join all words except the last as the state, and the last word as capital
+    state = " ".join(parts[:-1])
+    capital = parts[-1]
+
+    states.append(state)
+    capitals.append(capital)
+
+# Display the header
+print("\nSTATE               CAPITAL")
+print("---------------------------")
+
+# Display the data
+for s, c in zip(states, capitals):
+    print(f"{s:<20} {c}")
