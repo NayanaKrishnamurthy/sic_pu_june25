@@ -20,5 +20,5 @@ print(arr)
 arr=arr.reshape(-1,3) # row = 9/3 = 3
 print(arr)
 
-arr=arr.reshape(-1,-1)  # error
+#arr=arr.reshape(-1,-1)  # error
 #arr = arr.reshape(2, 5) # ValueError

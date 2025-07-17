@@ -65,8 +65,6 @@ class Queue:
             print(temp.data)
             temp = temp.link
 
-
-# ------------ Menu-Driven Program ----------------
 if __name__ == "__main__":
     q = Queue()
     while True:

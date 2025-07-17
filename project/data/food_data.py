@@ -1,12 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Reads food data from a CSV file and parses the 'Date' column into datetime format
 def read_food_data():
-    file_path = "C:\\Users\\admin\\Downloads\\food_data_2years.csv"  
+    file_path = "C:\\Users\\admin\\Downloads\\food_data_2years.csv"
     df = pd.read_csv(file_path)
-    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = pd.to_datetime(df['Date'])  # Convert 'Date' column to datetime
     return df
 
+# Allows the user to input a custom date range and analyzes daily waste
 def analyze_daily_waste_user_input():
     df = read_food_data()
     print(f"\nAvailable data: {df['Date'].min().date()} to {df['Date'].max().date()}")
@@ -72,7 +74,6 @@ def analyze_weekly_waste_user_input():
 
     month_df['Week'] = ((month_df['Date'].dt.day - 1) // 7) + 1
     weekly = month_df.groupby('Week')['Wasted_kg'].sum()
-
     max_week = weekly.idxmax()
     min_week = weekly.idxmin()
     max_val = weekly.max()
@@ -82,10 +83,8 @@ def analyze_weekly_waste_user_input():
     bars = plt.bar(weekly.index, weekly.values, color='lightgreen')
     bars[max_week - 1].set_color('red')
     bars[min_week - 1].set_color('blue')
-
     plt.text(max_week, max_val + 1, f"{max_val:.1f} kg (High)", ha='center', color='red')
     plt.text(min_week, min_val + 1, f"{min_val:.1f} kg (Low)", ha='center', color='blue')
-
     plt.title(f"Weekly Food Waste – {start.strftime('%B %Y')}")
     plt.xlabel("Week Number")
     plt.ylabel("Total Waste (kg)")
@@ -96,7 +95,6 @@ def analyze_weekly_waste_user_input():
     print(f"\n--- Smart Suggestion for {start.strftime('%B %Y')} ---")
     print(f"→ Highest waste: Week {max_week} = {max_val:.1f} kg")
     print(f"→ Lowest waste: Week {min_week} = {min_val:.1f} kg")
-
     if max_val - min_val > 20:
         print("→ Action: Adjust food quantity based on weekday patterns or events.")
     elif max_val > 35:
@@ -104,6 +102,7 @@ def analyze_weekly_waste_user_input():
     else:
         print("→ Waste level is well balanced across weeks.")
 
+# Monthly analysis for a selected year
 def analyze_monthly_waste_user_input():
     df = read_food_data()
     year = input("Enter year (e.g., 2024): ")
@@ -131,7 +130,6 @@ def analyze_monthly_waste_user_input():
 
     plt.text(max_month, max_val + 2, f"{max_val:.1f} kg (High)", ha='center', color='red')
     plt.text(min_month, min_val + 2, f"{min_val:.1f} kg (Low)", ha='center', color='blue')
-
     plt.title(f"Monthly Food Waste for {year}")
     plt.xlabel("Month")
     plt.ylabel("Total Waste (kg)")
@@ -142,7 +140,6 @@ def analyze_monthly_waste_user_input():
     print(f"\n--- Smart Suggestion for {year} ---")
     print(f"→ Highest waste: Month {max_month} = {max_val:.1f} kg")
     print(f"→ Lowest waste: Month {min_month} = {min_val:.1f} kg")
-
     if max_val > 1000:
         print("→ Action: Investigate events, exam breaks, or holidays causing spikes.")
     elif max_val - min_val > 400:
@@ -158,9 +155,7 @@ def show_food_menu():
         print("2. Weekly Waste (Choose Month)")
         print("3. Monthly Waste (Choose Year)")
         print("4. Exit")
-
         choice = input("Enter your choice (1–4): ")
-
         if choice == '1':
             analyze_daily_waste_user_input()
         elif choice == '2':

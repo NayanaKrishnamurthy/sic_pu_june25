@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def read_serving_data():
-    file_path = "C:\\Users\\admin\\Downloads\\serving_data_2years.csv"
+    file_path ="C:\\learning\\sic_pu_june25\\project\\data\\serving_data.csv"
     df = pd.read_csv(file_path)
     df['Date'] = pd.to_datetime(df['Date'])
     return df

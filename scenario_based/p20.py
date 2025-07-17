@@ -18,7 +18,7 @@ def height(root):
         return -1  # height is counted in edges
     return 1 + max(height(root.left), height(root.right))
 
-values = [10, 5, 20, 3, 7, 30]  
+values = [10, 5, 20, 3, 7, 30]   
 
 root = None
 for val in values:
